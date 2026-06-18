@@ -8,7 +8,7 @@ This project has no application database. The "entities" are infrastructure and 
 |-------|------|-------|
 | domain | string (FQDN) | One of the 6 approved domains; unique |
 | service_name | string | Maps 1:1 to a domain and an app-repo |
-| dns_record_type | enum | Always `A` |
+| dns_record_type | enum | Always `A` (apex) plus wildcard `A` (`*.<domain>`) |
 | dns_proxied | bool | Always `false` (Cloudflare grey cloud) |
 | dns_ttl | number | `60` |
 | target_ip | string (IPv4) | The EC2 Elastic IP; shared by all 6 domains |
@@ -32,7 +32,7 @@ This project has no application database. The "entities" are infrastructure and 
 | image_ref | string | `public.ecr.aws/<alias>/<service_name>` |
 | image_tag | string | Commit SHA (immutable); `latest` also published |
 | running_digest | string | Must equal intended ECR Public digest after deploy |
-| traefik_router_rule | string | `Host(<domain>)`, entrypoint `websecure`, TLS `letsencrypt` |
+| traefik_router_rule | string | `Host(<domain>) \|\| HostRegexp(^[a-z0-9-]+\\.<domain-escaped>$)` (apex + one-level subdomains), entrypoint `websecure`, TLS `letsencrypt` |
 | host_ports | none | Containers expose NO host ports (Traefik network only) |
 
 **State transitions**: `built` → `pushed (ECR Public)` → `dispatched` → `pulled on EC2` →

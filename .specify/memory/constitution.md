@@ -113,8 +113,10 @@ All 6 domains resolve to the same EC2 public IP, and Traefik is the sole entry p
   Traefik level, not inside containers.
 - Each app container runs `nginx:alpine` serving a single `index.html`, exposes NO host ports, and
   is reachable only through Traefik over the shared Docker network.
-- Routing is declared via Docker labels: `Host(...)`, entrypoint `websecure`, TLS certresolver
-  `letsencrypt`. TLS termination and ACME (HTTP challenge) renewal are handled by Traefik.
+- Routing is declared via Docker labels: `Host(<domain>) || HostRegexp(...)` (apex plus one-level
+  subdomains), entrypoint `websecure`, TLS certresolver `letsencrypt`. TLS termination and ACME
+  (HTTP challenge) renewal are handled by Traefik; per-subdomain certs are issued on first HTTPS
+  request.
 - Cloudflare proxy MUST be OFF (DNS-only, grey cloud) for these domains so the Let's Encrypt HTTP
   challenge reaches the server directly. ACME storage (`acme.json`) MUST be mode `600`.
 - The Traefik dashboard MUST be disabled in production or bound to localhost only.

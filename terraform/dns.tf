@@ -12,3 +12,18 @@ resource "cloudflare_dns_record" "site" {
   ttl     = 60
   comment = "Managed by Terraform (${local.project}) - site A-record only"
 }
+
+# Wildcard A-record so each project can use one-level subdomains (e.g. bot1.ddnsteltonicka.pp.ua).
+# Traefik routes subdomains to the same container as the apex domain; Let's Encrypt issues
+# per-subdomain certs on first HTTPS request via HTTP-01.
+resource "cloudflare_dns_record" "site_wildcard" {
+  for_each = local.services
+
+  zone_id = data.cloudflare_zone.site[each.key].zone_id
+  name    = "*"
+  type    = "A"
+  content = aws_eip.web.public_ip
+  proxied = false
+  ttl     = 60
+  comment = "Managed by Terraform (${local.project}) - wildcard A-record for project subdomains"
+}

@@ -25,7 +25,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.buyraq.rule=Host(`buyraq.com`)"
+      - "traefik.http.routers.buyraq.rule=Host(`buyraq.com`) || HostRegexp(`^[a-z0-9-]+\\.buyraq\\.com$`)"
       - "traefik.http.routers.buyraq.entrypoints=websecure"
       - "traefik.http.routers.buyraq.tls.certresolver=letsencrypt"
       - "traefik.http.services.buyraq.loadbalancer.server.port=80"
@@ -37,7 +37,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.codehelp.rule=Host(`codehelp.pp.ua`)"
+      - "traefik.http.routers.codehelp.rule=Host(`codehelp.pp.ua`) || HostRegexp(`^[a-z0-9-]+\\.codehelp\\.pp\\.ua$`)"
       - "traefik.http.routers.codehelp.entrypoints=websecure"
       - "traefik.http.routers.codehelp.tls.certresolver=letsencrypt"
       - "traefik.http.services.codehelp.loadbalancer.server.port=80"
@@ -49,7 +49,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.cosmeticpro.rule=Host(`cosmeticpro.pp.ua`)"
+      - "traefik.http.routers.cosmeticpro.rule=Host(`cosmeticpro.pp.ua`) || HostRegexp(`^[a-z0-9-]+\\.cosmeticpro\\.pp\\.ua$`)"
       - "traefik.http.routers.cosmeticpro.entrypoints=websecure"
       - "traefik.http.routers.cosmeticpro.tls.certresolver=letsencrypt"
       - "traefik.http.services.cosmeticpro.loadbalancer.server.port=80"
@@ -61,7 +61,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ddnsteltonicka.rule=Host(`ddnsteltonicka.pp.ua`)"
+      - "traefik.http.routers.ddnsteltonicka.rule=Host(`ddnsteltonicka.pp.ua`) || HostRegexp(`^[a-z0-9-]+\\.ddnsteltonicka\\.pp\\.ua$`)"
       - "traefik.http.routers.ddnsteltonicka.entrypoints=websecure"
       - "traefik.http.routers.ddnsteltonicka.tls.certresolver=letsencrypt"
       - "traefik.http.services.ddnsteltonicka.loadbalancer.server.port=80"
@@ -73,7 +73,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.solovkadmytro.rule=Host(`solovkadmytro.pp.ua`)"
+      - "traefik.http.routers.solovkadmytro.rule=Host(`solovkadmytro.pp.ua`) || HostRegexp(`^[a-z0-9-]+\\.solovkadmytro\\.pp\\.ua$`)"
       - "traefik.http.routers.solovkadmytro.entrypoints=websecure"
       - "traefik.http.routers.solovkadmytro.tls.certresolver=letsencrypt"
       - "traefik.http.services.solovkadmytro.loadbalancer.server.port=80"
@@ -85,7 +85,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.solovkaskincare.rule=Host(`solovkaskincare.pp.ua`)"
+      - "traefik.http.routers.solovkaskincare.rule=Host(`solovkaskincare.pp.ua`) || HostRegexp(`^[a-z0-9-]+\\.solovkaskincare\\.pp\\.ua$`)"
       - "traefik.http.routers.solovkaskincare.entrypoints=websecure"
       - "traefik.http.routers.solovkaskincare.tls.certresolver=letsencrypt"
       - "traefik.http.services.solovkaskincare.loadbalancer.server.port=80"
